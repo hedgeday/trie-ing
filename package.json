@@ -1,7 +1,7 @@
 {
-  "name": "trie-ing",
-  "version": "0.4.4",
-  "description": "The trie from node-autocompleter in a form that can be used in browser",
+  "name": "@superhuman/trie-ing",
+  "version": "0.5.2",
+  "description": "A fast weighted autocompleter",
   "main": "index.js",
   "devDependencies": {
     "benchmark": "^1.0.0",
