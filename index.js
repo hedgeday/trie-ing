@@ -1,5 +1,5 @@
-var Node = require('./lib/node');
-var PQueue = require('./lib/pqueue');
+var Node = require("./lib/node");
+var PQueue = require("./lib/pqueue");
 
 /**
  * A Trie optimized for weighted autocompletion returning a small number
@@ -14,12 +14,12 @@ var PQueue = require('./lib/pqueue');
  * after a trie mutation. After that the widthFactor is mostly irrelevant.
  */
 var Trie = function (options) {
-    this.root = new Node();
-    if (options && options.maxWidth) {
-      this.maxWidth = options.maxWidth;
-    } else {
-      this.maxWidth = 500;
-    }
+  this.root = new Node();
+  if (options && options.maxWidth) {
+    this.maxWidth = options.maxWidth;
+  } else {
+    this.maxWidth = 500;
+  }
 };
 
 /**
@@ -32,7 +32,7 @@ var Trie = function (options) {
  * a .distinct property that is used to distinguish between multiple values that have the same key.
  */
 Trie.prototype.add = function (item) {
-    this.root.add(item, 0, this.maxWidth);
+  this.root.add(item, 0, this.maxWidth);
 };
 
 /**
@@ -48,24 +48,24 @@ Trie.prototype.add = function (item) {
  * algorithm is determined primarily by the limit.
  */
 Trie.prototype.prefixSearch = function (prefix, opts) {
-    var results = [];
-    var node = this.root.findPrefix(prefix, 0);
+  var results = [];
+  var node = this.root.findPrefix(prefix, 0);
 
-    if (!opts) {
-        opts = {};
-    }
+  if (!opts) {
+    opts = {};
+  }
 
-    if (opts.limit == null) {
-        opts.limit = 1 / 0;
-    }
+  if (opts.limit == null) {
+    opts.limit = 1 / 0;
+  }
 
-    if (!node) {
-      return results;
-    }
-
-    node.getSortedResults(prefix, results, opts, new PQueue(opts.limit));
-
+  if (!node) {
     return results;
+  }
+
+  node.getSortedResults(prefix, results, opts, new PQueue(opts.limit));
+
+  return results;
 };
 
 module.exports = Trie;

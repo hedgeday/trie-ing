@@ -1,0 +1,11 @@
+{
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "comma-dangle": ["error", "never"]
+  },
+  "extends": ["plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}
