@@ -8,7 +8,7 @@ describe("Trie", function () {
     var item = {
       key: "one",
       value: 1,
-      score: 1,
+      score: 1
     };
 
     t.add(item);
@@ -22,22 +22,22 @@ describe("Trie", function () {
     var aaa = {
       key: "aaa",
       value: 2,
-      score: 2,
+      score: 2
     };
     var aaa2 = {
       key: "aaa",
       value: 4,
-      score: 4,
+      score: 4
     };
     var aab = {
       key: "aab",
       value: 3,
-      score: 3,
+      score: 3
     };
     var abb = {
       key: "abb",
       value: 1,
-      score: 1,
+      score: 1
     };
 
     var t = new Trie();
@@ -60,25 +60,25 @@ describe("Trie", function () {
     t.add({
       key: "aaa",
       value: 4,
-      score: 4,
+      score: 4
     });
 
     t.add({
       key: "aaa",
       value: 3,
-      score: 3,
+      score: 3
     });
 
     t.add({
       key: "aab",
       value: 2,
-      score: 2,
+      score: 2
     });
 
     t.add({
       key: "abb",
       value: 1,
-      score: 1,
+      score: 1
     });
 
     assert.deepEqual(
@@ -98,7 +98,7 @@ describe("Trie", function () {
     t.add({
       key: "gaa",
       value: 2,
-      score: 2,
+      score: 2
     });
 
     assert.deepEqual([], t.prefixSearch("gb"));
@@ -109,13 +109,13 @@ describe("Trie", function () {
     t.add({
       key: "abc",
       value: 2,
-      score: 2,
+      score: 2
     });
 
     t.add({
       key: "abc",
       value: 4,
-      score: 4,
+      score: 4
     });
 
     assert.deepEqual([4], t.prefixSearch("abc", { limit: 1 }));
@@ -126,13 +126,13 @@ describe("Trie", function () {
     t.add({
       key: "sarah",
       value: 1,
-      score: 1,
+      score: 1
     });
 
     t.add({
       key: "shashi",
       value: 2,
-      score: 2,
+      score: 2
     });
 
     assert.deepEqual([2], t.prefixSearch("sha"));
@@ -144,19 +144,19 @@ describe("Trie", function () {
     t.add({
       key: "abc",
       value: 1,
-      score: 1,
+      score: 1
     });
 
     t.add({
       key: "acc",
       value: 1,
-      score: 1,
+      score: 1
     });
 
     t.add({
       key: "abb",
       value: 1,
-      score: 1,
+      score: 1
     });
 
     assert.deepEqual([1, 1, 1], t.prefixSearch("a", { unique: true }));
@@ -169,14 +169,14 @@ describe("Trie", function () {
       key: "aaa",
       distinct: "b",
       score: 1,
-      value: 1,
+      value: 1
     });
 
     t.add({
       key: "aaa",
       distinct: "c",
       score: 2,
-      value: 2,
+      value: 2
     });
 
     assert.deepEqual([2, 1], t.prefixSearch("a", { unique: true }));
@@ -189,21 +189,21 @@ describe("Trie", function () {
       key: "aaa",
       distinct: "b",
       score: 3,
-      value: 3,
+      value: 3
     });
 
     t.add({
       key: "aaa",
       distinct: "b",
       score: 2,
-      value: 2,
+      value: 2
     });
 
     t.add({
       key: "aaa",
       distinct: "c",
       score: 1,
-      value: 1,
+      value: 1
     });
 
     assert.deepEqual([3, 1], t.prefixSearch("a", { unique: true, limit: 2 }));
@@ -221,14 +221,14 @@ describe("Trie", function () {
         key: contact.email,
         distinct: contact.email + contact.name,
         score: contact.score,
-        value: contact,
+        value: contact
       });
 
       t.add({
         key: contact.name.toLowerCase(),
         distinct: contact.email + contact.name,
         score: contact.score,
-        value: contact,
+        value: contact
       });
     }
 
@@ -239,7 +239,7 @@ describe("Trie", function () {
         "risus.at.fringilla@Fusce.com",
         "tortor@Cras.org",
         "tortor@penatibusetmagnis.com",
-        "tellus.Nunc.lectus@ligulaeuenim.com",
+        "tellus.Nunc.lectus@ligulaeuenim.com"
       ],
       results.map((result) => result.email)
     );
@@ -251,7 +251,7 @@ describe("Trie", function () {
         "a.ultricies@a.com",
         "Etiam.bibendum@necquam.org",
         "orci.adipiscing.non@euligulaAenean.net",
-        "mi.tempor.lorem@scelerisquedui.ca",
+        "mi.tempor.lorem@scelerisquedui.ca"
       ],
       results.map((result) => result.email)
     );
@@ -263,7 +263,7 @@ describe("Trie", function () {
         "Fusce.aliquet.magna@esttemporbibendum.net",
         "auctor.velit.eget@risusDuisa.co.uk",
         "vehicula.Pellentesque.tincidunt@leoelementumsem.com",
-        "arcu.vel@velitinaliquet.net",
+        "arcu.vel@velitinaliquet.net"
       ],
       results.map((result) => result.email)
     );

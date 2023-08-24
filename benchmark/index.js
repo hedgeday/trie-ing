@@ -18,14 +18,14 @@ var suite = new Benchmark(
         key: email,
         score: score,
         value: data,
-        distinct: email + name,
+        distinct: email + name
       });
 
       t.add({
         key: name,
         score: score,
         value: data,
-        distinct: email + name,
+        distinct: email + name
       });
     });
   })
