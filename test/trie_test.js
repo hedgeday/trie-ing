@@ -249,5 +249,60 @@ describe('Trie', function () {
     results = t.prefixSearch('zachary ba', {limit: 5})
     assert.deepEqual(["blandit@duiFuscediam.ca"], results.map((result) => result.email))
   })
+
+  it('should be able to delete values from the trie', function() {
+    this.timeout(5000)
+    var contacts = require('../benchmark/contacts.json')
+
+    var t = new Trie();
+
+    for (var i = 0; i < contacts.length; i++) {
+      contact = contacts[i];
+      t.add({
+        key: contact.email,
+        distinct: contact.email + contact.name,
+        score: contact.score,
+        value: contact
+      })
+
+      t.add({
+        key: contact.name.toLowerCase(),
+        distinct: contact.email + contact.name,
+        score: contact.score,
+        value: contact
+      })
+    }
+
+    results = t.prefixSearch('t', {limit: 5})
+    assert.deepEqual(['tellus.Nunc.lectus@ullamcorpereu.org', 'risus.at.fringilla@Fusce.com', 'tortor@Cras.org', 'tortor@penatibusetmagnis.com', 'tellus.Nunc.lectus@ligulaeuenim.com'], results.map((result) => result.email))
+
+    t.delete('tellus.Nunc.lectus@ullamcorpereu.org', 'tellus.Nunc.lectus@ullamcorpereu.orgSummer C. Avery')
+    results = t.prefixSearch('t', {limit: 5})
+    // NB: This result can be verified by running the original (above) test with a modified fixture with the "deleted" contact pre-removed.
+    assert.deepEqual(['risus.at.fringilla@Fusce.com', 'tortor@Cras.org', 'tortor@penatibusetmagnis.com', 'tellus.Nunc.lectus@ligulaeuenim.com', "tincidunt.tempus.risus@Nulla.ca"], results.map((result) => result.email))
+
+    results = t.prefixSearch('summer c.', {limit: 5})
+    assert.deepEqual(["tellus.Nunc.lectus@ullamcorpereu.org", "sed@augue.co.uk"], results.map((result) => result.email))
+
+    t.delete('summer c. avery', 'tellus.Nunc.lectus@ullamcorpereu.orgSummer C. Avery')
+    results = t.prefixSearch('summer c.', {limit: 5})
+    // NB: This result can be verified by running the original (above) test with a modified fixture with the "deleted" contact pre-removed.
+    assert.deepEqual(["sed@augue.co.uk"], results.map((result) => result.email))
+
+
+    results = t.prefixSearch('sh', {limit: 5})
+    assert.deepEqual(["ornare@acrisus.co.uk", "a.ultricies@a.com", "Etiam.bibendum@necquam.org", "orci.adipiscing.non@euligulaAenean.net", "mi.tempor.lorem@scelerisquedui.ca"], results.map((result) => result.email))
+
+    t.delete("shelley m. cannon", "Etiam.bibendum@necquam.orgShelley M. Cannon")
+    results = t.prefixSearch('sh', {limit: 5})
+    assert.deepEqual(["ornare@acrisus.co.uk", "a.ultricies@a.com", "orci.adipiscing.non@euligulaAenean.net", "mi.tempor.lorem@scelerisquedui.ca", "odio.Aliquam@interdumSedauctor.com"], results.map((result) => result.email))
+
+    results = t.prefixSearch('Etiam.bibendum@necquam', {limit: 5})
+    assert.deepEqual(['Etiam.bibendum@necquam.org'], results.map((result) => result.email))
+
+    t.delete("Etiam.bibendum@necquam.org", 'Etiam.bibendum@necquam.orgShelley M. Cannon')
+    results = t.prefixSearch('Etiam.bibendum@necquam', {limit: 5})
+    assert.deepEqual([], results.map((result) => result.email))
+  })
 });
 
