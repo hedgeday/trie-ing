@@ -35,9 +35,8 @@ Trie.prototype.add = function (item) {
   this.root.add(item, 0, this.maxWidth);
 };
 
-
-Trie.prototype.delete = function (key, distict) {
-    return this.root.delete(key, distict);
+Trie.prototype.delete = function (key, distinct) {
+  return this.root.delete(key, distinct);
 };
 
 /**
